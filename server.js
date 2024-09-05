@@ -10,7 +10,9 @@ const translate = new Translate({
   projectId: "villaonclick",
   keyFilename: "./servicefile.json", // Add path to your credentials file
 });
-
+app.get('/', (req, res) => {
+    res.status(200).json({ message: "running" });
+});
 // Detect language and translate function
 async function translateText(text, targetLanguage) {
   try {
