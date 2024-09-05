@@ -1,8 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 const { Translate } = require("@google-cloud/translate").v2;
 const bodyParser = require("body-parser");
 
 const app = express();
+app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json());
 
 // Google Translate API setup
@@ -10,9 +12,11 @@ const translate = new Translate({
   projectId: "villaonclick",
   keyFilename: "./servicefile.json", // Add path to your credentials file
 });
+
 app.get('/', (req, res) => {
-    res.status(200).json({ message: "running" });
+  res.status(200).json({ message: "running" });
 });
+
 // Detect language and translate function
 async function translateText(text, targetLanguage) {
   try {
